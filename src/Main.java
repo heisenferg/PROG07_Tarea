@@ -71,7 +71,6 @@ public class Main {
 
                             System.out.print("Introduce las entidades que harán cobros en la cuenta: ");
                             String entidades_cobro = teclado.next();
-                            CuentaAhorro ahorro = new CuentaAhorro();
                             banco.abrirCuenta( saldo, iban, cliente);
                             break;
 
