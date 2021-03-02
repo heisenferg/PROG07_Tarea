@@ -49,10 +49,10 @@ public class Main {
                     System.out.println("1. Cuenta de ahorro.");
                     System.out.println("2. Cuenta corriente personal.");
                     System.out.println("3. Cuenta corriente de empresa.");
-                    int tipocuenta = teclado.nextInt();
+                    banco.setTipocuenta(teclado.nextInt());
 
                     //Switch tipo cuenta
-                    switch (tipocuenta){
+                    switch (banco.getTipocuenta()){
                         case 1:
                             System.out.println("CUENTA DE AHORRO.");
                             System.out.println("-----------------");
@@ -60,7 +60,7 @@ public class Main {
                             System.out.print("Introduce el tipo de interés de remuneración: ");
                             float tipo_interes = teclado.nextFloat();
 
-                            banco.abrirCuenta(saldo, iban, tipo_interes, cliente);
+                            banco.abrirCuenta( saldo,  iban, tipo_interes,  cliente);
                             break;
                         case 2:
                             System.out.println("CUENTA CORRIENTE PERSONAL.");
@@ -71,8 +71,8 @@ public class Main {
 
                             System.out.print("Introduce las entidades que harán cobros en la cuenta: ");
                             String entidades_cobro = teclado.next();
-
-                            CuentaCorrientePersonal personal = new CuentaCorrientePersonal(saldo, iban, entidades_cobro,comision);
+                            CuentaAhorro ahorro = new CuentaAhorro();
+                            banco.abrirCuenta( saldo, iban, cliente);
                             break;
 
                         case 3:

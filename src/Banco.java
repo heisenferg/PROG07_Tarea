@@ -2,7 +2,7 @@
 
 public class Banco {
 
-    private CuentaAhorro[] listCuenta;
+    private CuentaBancaria[] listCuenta;
     private int Ncuentas;
     public static final int CAPACIDAD = 100;
     float ingreso, retirada;
@@ -12,22 +12,33 @@ public class Banco {
     y determinando el array con el máximo de capacidad.
     */
 
+    public int getTipocuenta() {
+        return tipocuenta;
+    }
+
+    public void setTipocuenta(int tipocuenta) {
+        this.tipocuenta = tipocuenta;
+    }
 
     public Banco() {
         Ncuentas = 0;
-        listCuenta = new CuentaAhorro[CAPACIDAD];
+        listCuenta = new CuentaBancaria[CAPACIDAD];
     }
 
 //Abrir cuenta
     public boolean abrirCuenta(float saldo, String iban, float tipo_interes, Persona cliente){
         if (Ncuentas < CAPACIDAD) {
-
-                CuentaAhorro ahorro = new CuentaAhorro(saldo, iban, tipo_interes, cliente);
-            listCuenta [Ncuentas] = ahorro;
+            if (tipocuenta==1) {
+                CuentaBancaria ahorro = new CuentaAhorro(saldo, iban, tipo_interes, cliente);
+                listCuenta[Ncuentas] = ahorro;
                 Ncuentas++;
-
-
-            System.out.println("Cuenta creada.");
+                System.out.println("Cuenta de Ahorro creada.");
+            } else if (tipocuenta==2){
+                CuentaBancaria personal = new CuentaCorrientePersonal(saldo, iban, entidades_cobro, comision);
+                listCuenta[Ncuentas] = personal;
+                Ncuentas++;
+                System.out.println("Cuenta corriente personal creada.");
+            }
             return true;
         }
         return false;

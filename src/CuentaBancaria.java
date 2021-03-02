@@ -1,7 +1,7 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class CuentaBancaria {
+public class CuentaBancaria {
     protected float saldo;
     protected String iban;
     Persona p1 = new Persona();
