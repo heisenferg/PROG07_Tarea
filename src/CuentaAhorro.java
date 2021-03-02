@@ -1,9 +1,27 @@
 public class CuentaAhorro extends CuentaBancaria{
     float tipo_interes;
+    Persona cliente = new Persona();
 
-    public CuentaAhorro(double saldo, String iban, String entidades_cobro, float tipo_interes,  Persona p1) {
-        super(saldo, iban, entidades_cobro, p1);
+    public CuentaAhorro(float saldo, String iban, float tipo_interes) {
+        super(saldo, iban);
         this.tipo_interes = tipo_interes;
+    }
+
+    public CuentaAhorro(float saldo, String iban, float tipo_interes, Persona cliente) {
+        super(saldo, iban);
+        this.tipo_interes = tipo_interes;
+        this.cliente = cliente;
+    }
+
+    public Persona getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Persona cliente) {
+        this.cliente = cliente;
+    }
+
+    public CuentaAhorro() {
     }
 
     public float getTipo_interes() {
@@ -20,7 +38,7 @@ public class CuentaAhorro extends CuentaBancaria{
                 "tipo_interes=" + tipo_interes +
                 ", saldo=" + saldo +
                 ", iban='" + iban + '\'' +
-                ", entidades_cobro='" + entidades_cobro + '\'' +
+                cliente +
                 '}';
     }
 }

@@ -1,9 +1,11 @@
 public class CuentaCorrientePersonal extends CuentaBancaria{
     float comision;
+    String entidades_cobro;
 
-    public CuentaCorrientePersonal(double saldo, String iban, String entidades_cobro, float comision,  Persona p1) {
-        super(saldo, iban, entidades_cobro, p1);
+    public CuentaCorrientePersonal(float saldo, String iban, String entidades_cobro, float comision) {
+        super(saldo, iban);
         this.comision = comision;
+        this.entidades_cobro=entidades_cobro;
     }
 
     public float getComision() {

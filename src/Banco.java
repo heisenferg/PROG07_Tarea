@@ -2,10 +2,11 @@
 
 public class Banco {
 
-    private CuentaBancaria[] listCuenta;
+    private CuentaAhorro[] listCuenta;
     private int Ncuentas;
     public static final int CAPACIDAD = 100;
     float ingreso, retirada;
+    int tipocuenta;
 
     /*Declaramos el constructor inicializando el número de vehículos en 0
     y determinando el array con el máximo de capacidad.
@@ -14,13 +15,19 @@ public class Banco {
 
     public Banco() {
         Ncuentas = 0;
-        listCuenta = new CuentaBancaria[CAPACIDAD];
+        listCuenta = new CuentaAhorro[CAPACIDAD];
     }
 
 //Abrir cuenta
-    public boolean abrirCuenta(double saldo, String iban, String entidades_cobro, Persona p1){
+    public boolean abrirCuenta(float saldo, String iban, float tipo_interes, Persona cliente){
         if (Ncuentas < CAPACIDAD) {
-            CuentaBancaria cuenta = new CuentaBancaria(saldo, iban, entidades_cobro, p1);
+
+                CuentaAhorro ahorro = new CuentaAhorro(saldo, iban, tipo_interes, cliente);
+            listCuenta [Ncuentas] = ahorro;
+                Ncuentas++;
+
+
+            System.out.println("Cuenta creada.");
             return true;
         }
         return false;
@@ -28,7 +35,8 @@ public class Banco {
 //Listar Cuenta
     public void listadoCuentas(){
         for(int i =0; i < Ncuentas; i++){
-            System.out.println("asfd " + listCuenta[i].toString());
+            System.out.println(listCuenta[i].toString());
+            System.out.println("HOla");
         }
     }
 
@@ -45,7 +53,7 @@ public class Banco {
 
 //Ingreso cuenta.REVISAR
 
-    public boolean ingresoCuenta(String iban, float ingreso, double saldo){
+    public boolean ingresoCuenta(String iban, float ingreso, float saldo){
         for (int i=0; i<Ncuentas; i++){
             if (listCuenta[i].getIban().equals(iban)){
                listCuenta[i].setSaldo(saldo+ingreso);
@@ -58,14 +66,14 @@ public class Banco {
 
 //SACAr dinero
 
-    public boolean retiradaCuenta(String iban, float retirada, double saldo){
+    public boolean retiradaCuenta(String iban, float retirada, float saldo){
         for (int i=0; i<Ncuentas; i++){
             if (listCuenta[i].getIban().equals(iban)){
                 if (listCuenta[i].getSaldo()< retirada) {
                     System.out.println("NO hay fondos suficientes.");
                 }
                 System.out.println("Retirada de dinero realizada correctamente.");
-                listCuenta[i].setSaldo(saldo-retirada);
+                listCuenta[i].setSaldo(saldo);
                 return true;
             }
         }

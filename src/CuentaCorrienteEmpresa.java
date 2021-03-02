@@ -1,10 +1,11 @@
 public class CuentaCorrienteEmpresa extends CuentaBancaria{
     float interes_descubierto;
-    double maximo_descubierto;
+    float maximo_descubierto;
     float comision_descubierto;
+    String entidades_cobro;
 
-    public CuentaCorrienteEmpresa(double saldo, String iban, String entidades_cobro, float interes_descubierto, double maximo_descubierto, float comision_descubierto,  Persona p1) {
-        super(saldo, iban, entidades_cobro, p1);
+    public CuentaCorrienteEmpresa(float saldo, String iban, String entidades_cobro, float interes_descubierto, float maximo_descubierto, float comision_descubierto) {
+        super(saldo, iban);
         this.interes_descubierto = interes_descubierto;
         this.maximo_descubierto = maximo_descubierto;
         this.comision_descubierto = comision_descubierto;
@@ -22,7 +23,7 @@ public class CuentaCorrienteEmpresa extends CuentaBancaria{
         return maximo_descubierto;
     }
 
-    public void setMaximo_descubierto(double maximo_descubierto) {
+    public void setMaximo_descubierto(float maximo_descubierto) {
         this.maximo_descubierto = maximo_descubierto;
     }
 
