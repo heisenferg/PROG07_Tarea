@@ -26,19 +26,14 @@ public class Banco {
     }
 
 //Abrir cuenta
-    public boolean abrirCuenta(float saldo, String iban, float tipo_interes, Persona cliente){
+    public boolean abrirCuenta(float saldo, String iban,  Persona cliente){
         if (Ncuentas < CAPACIDAD) {
-            if (tipocuenta==1) {
-                CuentaBancaria ahorro = new CuentaAhorro(saldo, iban, tipo_interes, cliente);
+
+                CuentaBancaria ahorro = new CuentaBancaria(saldo, iban, cliente);
                 listCuenta[Ncuentas] = ahorro;
                 Ncuentas++;
-                System.out.println("Cuenta de Ahorro creada.");
-            } else if (tipocuenta==2){
-                CuentaBancaria personal = new CuentaCorrientePersonal(saldo, iban, entidades_cobro, comision);
-                listCuenta[Ncuentas] = personal;
-                Ncuentas++;
-                System.out.println("Cuenta corriente personal creada.");
-            }
+                System.out.println("Cuenta bancaria creada.");
+
             return true;
         }
         return false;
@@ -47,7 +42,6 @@ public class Banco {
     public void listadoCuentas(){
         for(int i =0; i < Ncuentas; i++){
             System.out.println(listCuenta[i].toString());
-            System.out.println("HOla");
         }
     }
 

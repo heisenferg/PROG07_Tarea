@@ -4,8 +4,8 @@ public class CuentaCorrienteEmpresa extends CuentaBancaria{
     float comision_descubierto;
     String entidades_cobro;
 
-    public CuentaCorrienteEmpresa(float saldo, String iban, String entidades_cobro, float interes_descubierto, float maximo_descubierto, float comision_descubierto) {
-        super(saldo, iban);
+    public CuentaCorrienteEmpresa(float saldo, String iban, Persona p1, String entidades_cobro, float interes_descubierto, float maximo_descubierto, float comision_descubierto) {
+        super(saldo, iban, p1);
         this.interes_descubierto = interes_descubierto;
         this.maximo_descubierto = maximo_descubierto;
         this.comision_descubierto = comision_descubierto;

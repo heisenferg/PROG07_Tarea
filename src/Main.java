@@ -27,7 +27,7 @@ public class Main {
                     System.out.print("Introduzca nombre del titular: ");
                     String nombre = teclado.next();
 
-                    System.out.print("Introduzca los dos apellidos: ");
+                    System.out.print("Introduzca los apellidos: ");
                     String apellidos = teclado.next();
 
                     System.out.print("Introduzca el DNI: ");
@@ -43,6 +43,7 @@ public class Main {
                     if (!CuentaBancaria.cIban(iban)){
                         throw new Exception ("El formato del Iban no es correcto.");
                     }
+                    banco.abrirCuenta(saldo, iban, cliente);
 
                     System.out.println("------------------------------------------------");
                     System.out.println("\nIntroduzca el tipo de cuenta que desea crear: ");
@@ -60,7 +61,7 @@ public class Main {
                             System.out.print("Introduce el tipo de interés de remuneración: ");
                             float tipo_interes = teclado.nextFloat();
 
-                            banco.abrirCuenta( saldo,  iban, tipo_interes,  cliente);
+                            CuentaAhorro ahorro = new CuentaAhorro(saldo, iban, cliente, tipo_interes);
                             break;
                         case 2:
                             System.out.println("CUENTA CORRIENTE PERSONAL.");
@@ -68,10 +69,11 @@ public class Main {
 
                             System.out.print("Introduce la comisión de mantenimiento: ");
                             float comision = teclado.nextFloat();
+                            teclado.nextLine();
 
                             System.out.print("Introduce las entidades que harán cobros en la cuenta: ");
                             String entidades_cobro = teclado.next();
-                            banco.abrirCuenta( saldo, iban, cliente);
+                            CuentaCorrientePersonal personal = new CuentaCorrientePersonal(saldo, iban, cliente, entidades_cobro, comision);
                             break;
 
                         case 3:
@@ -90,7 +92,7 @@ public class Main {
                             System.out.print("Introduce las entidades que harán cobros en la cuenta: ");
                             entidades_cobro = teclado.next();
 
-                            CuentaCorrienteEmpresa empresa = new CuentaCorrienteEmpresa(saldo, iban, entidades_cobro, interes_descubierto, maximo_descubierto, comision_descubierto);
+                            CuentaCorrienteEmpresa empresa = new CuentaCorrienteEmpresa(saldo, iban, cliente, entidades_cobro, interes_descubierto, maximo_descubierto, comision_descubierto);
                             break;
                     }
                     break;

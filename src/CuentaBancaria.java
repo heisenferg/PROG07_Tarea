@@ -1,7 +1,7 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CuentaBancaria {
+public  class  CuentaBancaria {
     protected float saldo;
     protected String iban;
     Persona p1 = new Persona();
@@ -9,9 +9,10 @@ public class CuentaBancaria {
     public CuentaBancaria() {
     }
 
-    public CuentaBancaria(float saldo, String iban) {
+    public CuentaBancaria(float saldo, String iban, Persona p1) {
         this.saldo = saldo;
         this.iban = iban;
+        this.p1 = p1;
     }
 
     public double getSaldo() {
@@ -51,7 +52,7 @@ public class CuentaBancaria {
     public String toString() {
         return "CuentaBancaria{" +
                 "saldo=" + saldo +
-                ", iban='" + iban + '\'' +
+                ", iban='" + iban + '\'' + p1 +
                  '}';
     }
 }
