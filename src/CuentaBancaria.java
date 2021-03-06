@@ -55,4 +55,17 @@ public  class  CuentaBancaria {
                 ", iban='" + iban + '\'' + p1 +
                  '}';
     }
+
+    //Suma del ingreso.
+
+    public void saldoActualizado(float ingreso){
+        this.saldo += ingreso;
+    }
+
+
+    //Retirada de dinero.
+
+    public void saldoRetirado(float retirada){
+        this.saldo -= retirada;
+    }
 }
