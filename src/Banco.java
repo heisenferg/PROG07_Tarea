@@ -1,11 +1,11 @@
-import org.w3c.dom.ls.LSOutput;
-
 public class Banco {
 
     private CuentaBancaria[] listCuenta;
     private int Ncuentas;
     public static final int CAPACIDAD = 100;
-    float ingreso, retirada, saldo;
+    double ingreso;
+    double retirada;
+    double saldo;
     int tipocuenta;
 
     /*Declaramos el constructor inicializando el número de vehículos en 0
@@ -26,7 +26,7 @@ public class Banco {
     }
 
 //Abrir cuenta
-    public boolean abrirCuenta(float saldo, String iban,  Persona cliente){
+    public boolean abrirCuenta(double saldo, String iban, Persona cliente){
         if (Ncuentas < CAPACIDAD) {
 
                 CuentaBancaria cuenta = new CuentaBancaria(saldo, iban, cliente);
@@ -38,6 +38,7 @@ public class Banco {
         }
         return false;
     }
+
 //Listar Cuenta
     public void listadoCuentas(){
         for(int i =0; i < Ncuentas; i++){
@@ -49,7 +50,7 @@ public class Banco {
 
     public String informacionCuenta(String iban){
 
-        for (int i=0; i<100;i++){
+        for (int i=0; i<listCuenta.length;i++){
             if (listCuenta[i].getIban().equals(iban)){
                 return listCuenta[i].toString();
             }
@@ -82,7 +83,7 @@ public class Banco {
         return false;
     }
 
-//SACAr dinero
+//Sacar dinero de la cuenta.
 
     public boolean retiradaCuenta(String iban, float retirada){
         if (retirada == 0) {
@@ -110,10 +111,11 @@ public class Banco {
 //Ver saldo.
 
     public double obtenerSaldo(String iban){
-        for (int i=0; i<Ncuentas;i++){
+        for (int i=0; i<listCuenta.length;i++){
             if (listCuenta[i].getIban().equals(iban)){
                 return listCuenta[i].getSaldo();
             }
+            System.out.println("No existe la cuenta.");
         }
         return -1;
     }

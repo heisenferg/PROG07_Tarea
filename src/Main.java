@@ -1,5 +1,3 @@
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.regex.Matcher;
@@ -7,6 +5,9 @@ import java.util.regex.Pattern;
 
 public class Main {
 
+    /*
+    Método para comprobar el formato del DNI
+     */
     public static boolean cDNI(String DNI) {
         boolean comprobar = true;
         Pattern nif = Pattern.compile("^[XYxy]?[0-9]{8}[A-Za-z]$");
@@ -56,7 +57,7 @@ public class Main {
                     Persona cliente = new Persona(nombre, apellidos, DNI);
 
                     System.out.print("Introduzca el saldo inicial: ");
-                    float saldo = teclado.nextFloat();
+                    double saldo = teclado.nextFloat();
 
                     System.out.print("Introduzca el IBAN: ");
                     String iban = teclado.next();
@@ -81,7 +82,7 @@ public class Main {
                             System.out.print("Introduce el tipo de interés de remuneración: ");
                             float tipo_interes = teclado.nextFloat();
 
-                            CuentaAhorro ahorro = new CuentaAhorro(saldo, iban, cliente, tipo_interes);
+                            CuentaBancaria ahorro = new CuentaAhorro(saldo, iban, cliente, tipo_interes);
                             System.out.println("Cuenta de ahorro creada.");
                             break;
                         case 2:
@@ -156,7 +157,7 @@ public class Main {
                 case 6:
                     System.out.println("CONSULTAR SALDO.");
                     System.out.println("----------------");
-                    System.out.print("Introduce número de cuenta (Iban)");
+                    System.out.print("Introduce número de cuenta (Iban): ");
                     iban = teclado.next();
                     banco.obtenerSaldo(iban);
                     break;
