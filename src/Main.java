@@ -94,7 +94,7 @@ public class Main {
 
                             System.out.print("Introduce las entidades que harán cobros en la cuenta: ");
                             String entidades_cobro = teclado.next();
-                            CuentaCorrientePersonal personal = new CuentaCorrientePersonal(saldo, iban, cliente, entidades_cobro, comision);
+                            CuentaBancaria personal = new CuentaCorrientePersonal(saldo, iban, cliente, entidades_cobro, comision);
                             System.out.println("Cuenta corriente personal creada.");
                             break;
 
@@ -115,7 +115,7 @@ public class Main {
                             System.out.print("Introduce las entidades que harán cobros en la cuenta: ");
                             entidades_cobro = teclado.nextLine();
 
-                            CuentaCorrienteEmpresa empresa = new CuentaCorrienteEmpresa(saldo, iban, cliente, entidades_cobro, interes_descubierto, maximo_descubierto, comision_descubierto);
+                            CuentaBancaria empresa = new CuentaCorrienteEmpresa(saldo, iban, cliente, entidades_cobro, interes_descubierto, maximo_descubierto, comision_descubierto);
                             System.out.println("Cuenta corriente de empresa creada.");
                             break;
                     }
