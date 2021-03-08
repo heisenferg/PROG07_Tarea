@@ -1,29 +1,38 @@
 public class CuentaCorrienteEmpresa extends CuentaBancaria{
-    float interes_descubierto;
-    float maximo_descubierto;
-    float comision_descubierto;
+    double interes_descubierto;
+    double maximo_descubierto;
+    double comision_descubierto;
     String entidades_cobro;
 
     /*
     Constructor
      */
 
-    public CuentaCorrienteEmpresa(double saldo, String iban, Persona p1, String entidades_cobro, float interes_descubierto, float maximo_descubierto, float comision_descubierto) {
+    public CuentaCorrienteEmpresa(double saldo, String iban, Persona p1, String entidades_cobro, double interes_descubierto, double maximo_descubierto, double comision_descubierto) {
         super(saldo, iban, p1);
         this.interes_descubierto = interes_descubierto;
         this.maximo_descubierto = maximo_descubierto;
         this.comision_descubierto = comision_descubierto;
+        this.entidades_cobro = entidades_cobro;
     }
 
     /*
     Getter y setter
      */
 
-    public float getInteres_descubierto() {
+    public String getEntidades_cobro() {
+        return entidades_cobro;
+    }
+
+    public void setEntidades_cobro(String entidades_cobro) {
+        this.entidades_cobro = entidades_cobro;
+    }
+
+    public double getInteres_descubierto() {
         return interes_descubierto;
     }
 
-    public void setInteres_descubierto(float interes_descubierto) {
+    public void setInteres_descubierto(double interes_descubierto) {
         this.interes_descubierto = interes_descubierto;
     }
 
@@ -31,27 +40,33 @@ public class CuentaCorrienteEmpresa extends CuentaBancaria{
         return maximo_descubierto;
     }
 
-    public void setMaximo_descubierto(float maximo_descubierto) {
+    public void setMaximo_descubierto(double maximo_descubierto) {
         this.maximo_descubierto = maximo_descubierto;
     }
 
-    public float getComision_descubierto() {
+    public double getComision_descubierto() {
         return comision_descubierto;
     }
 
-    public void setComision_descubierto(float comision_descubierto) {
+    public void setComision_descubierto(double comision_descubierto) {
         this.comision_descubierto = comision_descubierto;
     }
 
     @Override
-    public String toString() {
-        return "CuentaCorrienteEmpresa{" +
-                "saldo=" + saldo +
-                ", iban='" + iban + '\'' +
-                ", entidades_cobro='" + entidades_cobro + '\'' +
-                ", interes_descubierto=" + interes_descubierto +
-                ", maximo_descubierto=" + maximo_descubierto +
-                ", comision_descubierto=" + comision_descubierto +
-                '}';
+    public String devolverInfoString() {
+        return super.devolverInfoString() + " con un interés de descibierto de  "  + interes_descubierto + "%, con una cantidad máxima disponible por descubierto de "
+                + maximo_descubierto + " euros,una comisión por descubierto de " + comision_descubierto + "%. Entidades de cobro: " + entidades_cobro + ".";
+
+    }
+
+@Override
+    public boolean retiradaCuenta(double retirada){
+        if ((saldo - retirada) > - maximo_descubierto) {
+            double sacado = saldo - retirada;
+            saldo = sacado - ( -sacado * (interes_descubierto / 100)) - comision_descubierto;
+            System.out.println("Retirada realizada correctamente.");
+        }else if ((saldo - retirada) < -maximo_descubierto)
+            System.out.println("No puede disponer de más fondos. Ha superado el descubierto permitido.");
+        return false;
     }
 }

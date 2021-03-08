@@ -26,23 +26,19 @@ public class Banco {
     }
 
 //Abrir cuenta
-    public boolean abrirCuenta(double saldo, String iban, Persona cliente){
+    public boolean abrirCuenta(CuentaBancaria cuenta){
         if (Ncuentas < CAPACIDAD) {
-
-                CuentaBancaria cuenta = new CuentaBancaria(saldo, iban, cliente);
                 listCuenta[Ncuentas] = cuenta;
                 Ncuentas++;
-                System.out.println("Cuenta bancaria creada.");
-
-            return true;
-        }
+                return true;
+        } else
         return false;
     }
 
 //Listar Cuenta
     public void listadoCuentas(){
         for(int i =0; i < Ncuentas; i++){
-            System.out.println(listCuenta[i].toString());
+            System.out.println(listCuenta[i].devolverInfoString());
         }
     }
 
@@ -52,7 +48,7 @@ public class Banco {
 
         for (int i=0; i<listCuenta.length;i++){
             if (listCuenta[i].getIban().equals(iban)){
-                return listCuenta[i].toString();
+                return listCuenta[i].devolverInfoString();
             }
             System.out.println("No existe la cuenta.");
         }
@@ -62,9 +58,9 @@ public class Banco {
 
 
 
-//Ingreso cuenta.REVISAR
+//Ingreso cuenta.
 
-    public boolean ingresoCuenta(String iban, float ingreso){
+    public boolean ingresoCuenta(String iban, double ingreso){
         if (ingreso == 0) {
             throw new IllegalArgumentException("El importe a ingresar no puede ser cero.");
         }
@@ -83,9 +79,21 @@ public class Banco {
         return false;
     }
 
+    //-------------------------------------
+
+    private CuentaBancaria buscarCuenta (String iban){
+        CuentaBancaria cuenta = null;
+        for (int i =0; i <Ncuentas; i++){
+            if (listCuenta[i].getIban().equals(iban)) {
+                cuenta = listCuenta[i];
+            }
+        }
+        return cuenta;
+    }
+
 //Sacar dinero de la cuenta.
 
-    public boolean retiradaCuenta(String iban, float retirada){
+    public boolean retiradaCuenta(String iban, double retirada){
         if (retirada == 0) {
             throw new IllegalArgumentException("El importe a retirar no puede ser cero.");
         }
@@ -93,18 +101,12 @@ public class Banco {
             throw new IllegalArgumentException("El importe a retirar no puede ser negativo.");
         }
 
-        for (int i=0; i<Ncuentas; i++){
-            if (listCuenta[i].getIban().equals(iban)){
-                if (listCuenta[i].getSaldo()< retirada) {
-                    System.out.println("NO hay fondos suficientes.");
-                    break;
-                }
-
-                listCuenta[i].saldoRetirado(retirada);
-                System.out.println("Retirada de dinero realizada correctamente.");
-                return true;
-            }
+        CuentaBancaria cuenta = buscarCuenta(iban);
+        if (cuenta != null){
+            return cuenta.retiradaCuenta(retirada);
         }
+
+        System.out.println("No existe la cuenta.");
         return false;
     }
 
@@ -113,10 +115,12 @@ public class Banco {
     public double obtenerSaldo(String iban){
         for (int i=0; i<listCuenta.length;i++){
             if (listCuenta[i].getIban().equals(iban)){
-                return listCuenta[i].getSaldo();
-            }
-            System.out.println("No existe la cuenta.");
+                System.out.println(listCuenta[i].getSaldo() + " euros.");
+
+            }System.out.println("No existe la cuenta.");
+
         }
+
         return -1;
     }
 

@@ -1,7 +1,7 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public  class  CuentaBancaria {
+public  class  CuentaBancaria implements Imprimible {
     protected double saldo;
     protected String iban;
     Persona p1 = new Persona();
@@ -47,7 +47,7 @@ public  class  CuentaBancaria {
         return p1;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(double v, double saldo) {
         this.saldo = saldo;
     }
 
@@ -76,13 +76,14 @@ public  class  CuentaBancaria {
 
     /**
      *
-     * @return string con datos
+     * @return
      */
+
     @Override
-    public String toString() {
-        return "Cuenta Bancaria con un saldo de " +
-                saldo +
-                " euros, cuyo IBAN es " + iban + " pertenece a " + p1 +
+    public String devolverInfoString() {
+                return "Cuenta Bancaria con un saldo de " +
+                this.saldo +
+                " euros, cuyo IBAN es " + this.iban + " pertenece a " + this.p1.devolverInfoString() +
                 ".";
     }
 
@@ -92,7 +93,7 @@ public  class  CuentaBancaria {
      *
      * @param ingreso
      */
-    public void saldoActualizado(float ingreso){
+    public void saldoActualizado(double ingreso){
         this.saldo += ingreso;
     }
 
@@ -103,7 +104,18 @@ public  class  CuentaBancaria {
      *
      * @param retirada
      */
-    public void saldoRetirado(float retirada){
+    public void saldoRetirado(double retirada){
         this.saldo -= retirada;
     }
+
+    public boolean retiradaCuenta(double retirada){
+        if (retirada > saldo) {
+            saldo = saldo - retirada;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

@@ -1,4 +1,4 @@
 
 public interface Imprimible {
-    public void devolverInfoString();
+    public String devolverInfoString();
 }

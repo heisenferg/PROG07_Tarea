@@ -1,4 +1,4 @@
-public class Persona {
+public class Persona implements Imprimible {
     String nombre;
     String apellidos;
     String dni;
@@ -56,9 +56,11 @@ Get y set de las variables
      * @return string con los datos.
      */
     @Override
-    public String toString() {
+    public String devolverInfoString() {
         return "CLIENTE: " +
                 nombre + " " + apellidos + " con DNI "
                + dni;
     }
+
+
 }

@@ -64,7 +64,7 @@ public class Main {
                     if (!CuentaBancaria.cIban(iban)){
                         throw new Exception ("El formato del Iban no es correcto.");
                     }
-                    banco.abrirCuenta(saldo, iban, cliente);
+
 
                     System.out.println("------------------------------------------------");
                     System.out.println("\nIntroduzca el tipo de cuenta que desea crear: ");
@@ -80,9 +80,10 @@ public class Main {
                             System.out.println("-----------------");
 
                             System.out.print("Introduce el tipo de interés de remuneración: ");
-                            float tipo_interes = teclado.nextFloat();
-
+                            double tipo_interes = teclado.nextDouble();
                             CuentaBancaria ahorro = new CuentaAhorro(saldo, iban, cliente, tipo_interes);
+                            ahorro.saldo = saldo + (saldo * tipo_interes/100);
+                            banco.abrirCuenta(ahorro);
                             System.out.println("Cuenta de ahorro creada.");
                             break;
                         case 2:
@@ -90,12 +91,14 @@ public class Main {
                             System.out.println("--------------------------");
 
                             System.out.print("Introduce la comisión de mantenimiento: ");
-                            float comision = teclado.nextFloat();
+                            double comision = teclado.nextDouble();
                             teclado.nextLine();
 
                             System.out.print("Introduce las entidades que harán cobros en la cuenta: ");
                             String entidades_cobro = teclado.next();
                             CuentaBancaria personal = new CuentaCorrientePersonal(saldo, iban, cliente, entidades_cobro, comision);
+                            personal.saldo = saldo - (saldo*comision/100);
+                            banco.abrirCuenta(personal);
                             System.out.println("Cuenta corriente personal creada.");
                             break;
 
@@ -104,19 +107,20 @@ public class Main {
                             System.out.println("-------------------------");
 
                             System.out.print("Introduce el interés descubierto: ");
-                            float interes_descubierto = teclado.nextFloat();
+                            double interes_descubierto = teclado.nextFloat();
 
                             System.out.print("Introduce el máximo descubierto permitido: ");
-                            float maximo_descubierto = teclado.nextFloat();
+                            double maximo_descubierto = teclado.nextFloat();
 
-                            System.out.print("Introduce la comisiçon de descubierto: ");
-                            float comision_descubierto = teclado.nextFloat();
+                            System.out.print("Introduce la comisión por descubierto: ");
+                            double comision_descubierto = teclado.nextFloat();
                             teclado.nextLine();
 
                             System.out.print("Introduce las entidades que harán cobros en la cuenta: ");
                             entidades_cobro = teclado.nextLine();
 
                             CuentaBancaria empresa = new CuentaCorrienteEmpresa(saldo, iban, cliente, entidades_cobro, interes_descubierto, maximo_descubierto, comision_descubierto);
+                            banco.abrirCuenta(empresa);
                             System.out.println("Cuenta corriente de empresa creada.");
                             break;
                     }
@@ -142,7 +146,7 @@ public class Main {
                     System.out.println("Introduce tu cuenta (Iban): ");
                     iban = teclado.next();
                     System.out.print("Cantidad a ingresar: ");
-                    float ingreso = teclado.nextFloat();
+                    double ingreso = teclado.nextDouble();
                     banco.ingresoCuenta(iban, ingreso);
                     break;
                 case 5:
@@ -151,7 +155,7 @@ public class Main {
                     System.out.print("Introduce tu cuenta (Iban): ");
                     iban = teclado.next();
                     System.out.print("Cantidad que desea retirar: ");
-                    float retirada = teclado.nextFloat();
+                    double retirada = teclado.nextFloat();
                     banco.retiradaCuenta(iban, retirada);
                     break;
                 case 6:
